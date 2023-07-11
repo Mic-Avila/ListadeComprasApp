@@ -1,0 +1,66 @@
+<div class="p-5">
+    <div class="container shadow p-5">
+      <div class="p-5 border border-ligth rounded">
+        <h6>Lista de Compras</h6>
+        <hr />
+  
+        <form [formGroup]="formulario" (ngSubmit)="cadastrarProduto()">
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Nome do produto"
+                    formControlName="descricao"
+                  />
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    class="form-control form-control-sm"
+                    placeholder="Quantidade"
+                    formControlName="quantidade"
+                  />
+                </div>
+              </div>
+              <div class="col-2">
+                <button type="submit" class="btn btn-outline-info btn-sm"> Adicionar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="container">
+            <div class="pt-5 row"  *ngIf="produtos?.length === 0">
+                <span class="text-danger"> Sem produtos</span>
+            </div>
+            <div class="pt-5 row "  *ngIf="produtos && produtos.length > 0" >
+                <table class="table table-striped table-hover table-sm">
+                    <tr class="thead-ligth">
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                        <th>Ações</th>
+                    </tr>
+                    <tr *ngFor="let produto of produtos" class="text-danger" [class.table-danger]="produto.foiComprado == false">
+                        <td class="text-danger">{{produto.descricao}}</td>
+                        <td>{{produto.quantidade}}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-info rounded" (click)="produto && produto.id ? atualizarProduto(produto.id) : null">
+                               <fa-icon [icon]="faCheckCircle"></fa-icon>
+                            </button>
+                        </td>
+                        
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
